@@ -1,10 +1,10 @@
 package com.example.plannerapp.mapper;
 
 import com.example.plannerapp.dto.response.BoardWithColumnsResponseDto;
-import com.example.plannerapp.dto.response.ColumnResponseDtoWithTasks;
+import com.example.plannerapp.dto.response.SectionWithTasksResponseDto;
 import com.example.plannerapp.model.Board;
-import com.example.plannerapp.model.Collumn;
-import com.example.plannerapp.service.ColumnService;
+import com.example.plannerapp.model.Section;
+import com.example.plannerapp.service.SectionService;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
@@ -12,13 +12,13 @@ import java.util.stream.Collectors;
 
 @Component
 public class BoardWithColumnsMapper implements ResponseDtoMapper<BoardWithColumnsResponseDto, Board> {
-    private ResponseDtoMapper<ColumnResponseDtoWithTasks, Collumn> columnResponseDtoWithTasks;
-    private final ColumnService columnService;
+    private ResponseDtoMapper<SectionWithTasksResponseDto, Section> columnResponseDtoWithTasks;
+    private final SectionService sectionService;
 
-    public BoardWithColumnsMapper(ResponseDtoMapper<ColumnResponseDtoWithTasks, Collumn> columnResponseDtoWithTasks,
-                                  ColumnService columnService) {
+    public BoardWithColumnsMapper(ResponseDtoMapper<SectionWithTasksResponseDto, Section> columnResponseDtoWithTasks,
+                                  SectionService sectionService) {
         this.columnResponseDtoWithTasks = columnResponseDtoWithTasks;
-        this.columnService = columnService;
+        this.sectionService = sectionService;
     }
 
     @Override
@@ -27,8 +27,8 @@ public class BoardWithColumnsMapper implements ResponseDtoMapper<BoardWithColumn
         boardWithColumnsResponseDto.setId(model.getId());
         boardWithColumnsResponseDto.setBackgroundImagePath(model.getBackgroundImagePath());
         boardWithColumnsResponseDto.setName(model.getName());
-        if (model.getColumns() != null) {
-            boardWithColumnsResponseDto.setColumns(model.getColumns().stream()
+        if (model.getSections() != null) {
+            boardWithColumnsResponseDto.setColumns(model.getSections().stream()
                     .map(columnResponseDtoWithTasks:: mapToDto)
                     .collect(Collectors.toList()));
         }

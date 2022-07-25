@@ -3,16 +3,16 @@ package com.example.plannerapp.mapper;
 import com.example.plannerapp.dto.request.TaskRequestDto;
 import com.example.plannerapp.dto.response.TaskResponseDto;
 import com.example.plannerapp.model.Task;
-import com.example.plannerapp.service.ColumnService;
+import com.example.plannerapp.service.SectionService;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TaskMapper implements RequestDtoMapper <TaskRequestDto, Task>,
 ResponseDtoMapper<TaskResponseDto, Task> {
-    private final ColumnService columnService;
+    private final SectionService sectionService;
 
-    public TaskMapper(ColumnService columnService) {
-        this.columnService = columnService;
+    public TaskMapper(SectionService sectionService) {
+        this.sectionService = sectionService;
     }
 
     @Override
@@ -29,7 +29,7 @@ ResponseDtoMapper<TaskResponseDto, Task> {
         taskResponseDto.setId(model.getId());
         taskResponseDto.setTitle(model.getTitle());
         taskResponseDto.setDescription(model.getDescription());
-        taskResponseDto.setColumnId(model.getColumn().getId());
+        taskResponseDto.setSectionId(model.getSection().getId());
         return taskResponseDto;
     }
 }

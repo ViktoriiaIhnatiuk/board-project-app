@@ -13,7 +13,7 @@ public class Board {
     private String name;
     private String backgroundImagePath;
     @ManyToMany (cascade = {CascadeType.REMOVE})
-    private List<Collumn> collumns;
+    private List<Section> sections;
 
     public Long getId() {
         return id;
@@ -39,12 +39,12 @@ public class Board {
         this.backgroundImagePath = backgroundImagePath;
     }
 
-    public List<Collumn> getColumns() {
-        return collumns;
+    public List<Section> getSections() {
+        return sections;
     }
 
-    public void setColumns(List<Collumn> collumns) {
-        this.collumns = collumns;
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 
     @Override
@@ -53,7 +53,7 @@ public class Board {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", backgroundImagePath='" + backgroundImagePath + '\'' +
-                ", collumns=" + collumns +
+                ", sections=" + sections +
                 '}';
     }
 }

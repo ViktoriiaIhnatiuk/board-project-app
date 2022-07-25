@@ -1,6 +1,6 @@
 package com.example.plannerapp.dto.response;
 
-public class DeletedColumnResponseDto {
+public class DeletedSectionResponseDto {
     private Long id;
     private String name;
 
@@ -22,7 +22,7 @@ public class DeletedColumnResponseDto {
 
     @Override
     public String toString() {
-        return "DeletedColumnResponseDto{"
+        return "DeletedSectionResponseDto{"
                 + "id=" + id
                 + ", name='" + name + '\''
                 + '}';
