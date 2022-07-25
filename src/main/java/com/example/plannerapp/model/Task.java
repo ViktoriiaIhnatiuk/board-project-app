@@ -11,7 +11,7 @@ public class Task {
     private String title;
     private String description;
     @ManyToOne
-    private Collumn collumn;
+    private Section section;
 
     public Long getId() {
         return id;
@@ -37,12 +37,12 @@ public class Task {
         this.description = description;
     }
 
-    public Collumn getColumn() {
-        return collumn;
+    public Section getSection() {
+        return section;
     }
 
-    public void setColumn(Collumn collumn) {
-        this.collumn = collumn;
+    public void setSection(Section section) {
+        this.section = section;
     }
 
     @Override
@@ -51,7 +51,7 @@ public class Task {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", collumn=" + collumn +
+                ", section=" + section +
                 '}';
     }
 }

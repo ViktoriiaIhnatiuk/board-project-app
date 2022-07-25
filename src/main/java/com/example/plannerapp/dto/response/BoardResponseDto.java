@@ -6,7 +6,7 @@ public class BoardResponseDto {
     private Long id;
     private String name;
     private String backgroundImagePath;
-    private List<Long> columnsIds;
+    private List<Long> sectionsIds;
 
     public Long getId() {
         return id;
@@ -32,12 +32,12 @@ public class BoardResponseDto {
         this.backgroundImagePath = backgroundImagePath;
     }
 
-    public List<Long> getColumnsIds() {
-        return columnsIds;
+    public List<Long> getSectionsIds() {
+        return sectionsIds;
     }
 
-    public void setColumnsIds(List<Long> columnsIds) {
-        this.columnsIds = columnsIds;
+    public void setSectionsIds(List<Long> sectionsIds) {
+        this.sectionsIds = sectionsIds;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class BoardResponseDto {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", backgroundImagePath='" + backgroundImagePath + '\'' +
-                ", columnsIds=" + columnsIds +
+                ", columnsIds=" + sectionsIds +
                 '}';
     }
 }

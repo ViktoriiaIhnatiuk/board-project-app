@@ -2,11 +2,11 @@ package com.example.plannerapp.dto.response;
 
 import java.util.List;
 
-public class ColumnResponseDtoWithTasks {
+public class SectionResponseDto {
     private Long id;
     private String name;
-    private List<TaskResponseDto> tasks;
-    private List <Long> boardIds;
+    private List<Long> tasksIds;
+    private List<Long> boardIds;
 
     public Long getId() {
         return id;
@@ -24,12 +24,12 @@ public class ColumnResponseDtoWithTasks {
         this.name = name;
     }
 
-    public List<TaskResponseDto> getTasks() {
-        return tasks;
+    public List<Long> getTasksIds() {
+        return tasksIds;
     }
 
-    public void setTasks(List<TaskResponseDto> tasks) {
-        this.tasks = tasks;
+    public void setTasksIds(List<Long> tasksIds) {
+        this.tasksIds = tasksIds;
     }
 
     public List<Long> getBoardIds() {
@@ -42,10 +42,10 @@ public class ColumnResponseDtoWithTasks {
 
     @Override
     public String toString() {
-        return "ColumnResponseDto{" +
+        return "SectionResponseDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", tasks=" + tasks +
+                ", tasksIds=" + tasksIds +
                 ", boardId=" + boardIds +
                 '}';
     }

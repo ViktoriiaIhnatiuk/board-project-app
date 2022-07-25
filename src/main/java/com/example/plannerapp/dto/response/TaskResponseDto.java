@@ -4,7 +4,7 @@ public class TaskResponseDto {
     private Long id;
     private String title;
     private String description;
-    private Long columnId;
+    private Long sectionId;
 
     public Long getId() {
         return id;
@@ -30,12 +30,12 @@ public class TaskResponseDto {
         this.description = description;
     }
 
-    public Long getColumnId() {
-        return columnId;
+    public Long getSectionId() {
+        return sectionId;
     }
 
-    public void setColumnId(Long columnId) {
-        this.columnId = columnId;
+    public void setSectionId(Long sectionId) {
+        this.sectionId = sectionId;
     }
 
     @Override
@@ -44,7 +44,7 @@ public class TaskResponseDto {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
-                ", columnId=" + columnId +
+                ", columnId=" + sectionId +
                 '}';
     }
 }

@@ -6,7 +6,7 @@ public class BoardWithColumnsResponseDto {
     private Long id;
     private String name;
     private String backgroundImagePath;
-    private List<ColumnResponseDtoWithTasks> columns;
+    private List<SectionWithTasksResponseDto> columns;
 
     public Long getId() {
         return id;
@@ -32,11 +32,11 @@ public class BoardWithColumnsResponseDto {
         this.backgroundImagePath = backgroundImagePath;
     }
 
-    public List<ColumnResponseDtoWithTasks> getColumns() {
+    public List<SectionWithTasksResponseDto> getColumns() {
         return columns;
     }
 
-    public void setColumns(List<ColumnResponseDtoWithTasks> columns) {
+    public void setColumns(List<SectionWithTasksResponseDto> columns) {
         this.columns = columns;
     }
 

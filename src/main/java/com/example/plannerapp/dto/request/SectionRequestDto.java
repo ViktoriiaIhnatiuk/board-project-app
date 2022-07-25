@@ -1,8 +1,6 @@
 package com.example.plannerapp.dto.request;
 
-import javax.persistence.UniqueConstraint;
-
-public class ColumnRequestDto {
+public class SectionRequestDto {
     private String name;
 
     public String getName() {
@@ -15,10 +13,8 @@ public class ColumnRequestDto {
 
     @Override
     public String toString() {
-        return "ColumnRequestDto{" +
+        return "SectionRequestDto{" +
                 "name='" + name + '\'' +
-//                ", tasksIds=" + tasksIds +
-//                ", boardId=" + boardId +
                 '}';
     }
 }

@@ -3,15 +3,15 @@ package com.example.plannerapp.model;
 import javax.persistence.*;
 import java.util.List;
 @Entity
-@Table(name = "columns")
+@Table(name = "sections")
 
-public class Collumn {
+public class Section {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String name;
-    @OneToMany (cascade = {CascadeType.REMOVE}, mappedBy = "collumn")
+    @OneToMany (cascade = {CascadeType.REMOVE}, mappedBy = "section")
     private List<Task> tasks;
     @ManyToMany
     private List<Board> boards;
@@ -50,7 +50,7 @@ public class Collumn {
 
     @Override
     public String toString() {
-        return "Collumn{" +
+        return "Section{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", tasks=" + tasks +

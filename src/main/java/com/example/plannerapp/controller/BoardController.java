@@ -1,15 +1,15 @@
 package com.example.plannerapp.controller;
 
 import com.example.plannerapp.dto.request.BoardRequestDto;
-import com.example.plannerapp.dto.request.ColumnRequestDto;
+import com.example.plannerapp.dto.request.SectionRequestDto;
 import com.example.plannerapp.dto.response.BoardResponseDto;
 import com.example.plannerapp.dto.response.BoardWithColumnsResponseDto;
 import com.example.plannerapp.mapper.RequestDtoMapper;
 import com.example.plannerapp.mapper.ResponseDtoMapper;
 import com.example.plannerapp.model.Board;
-import com.example.plannerapp.model.Collumn;
+import com.example.plannerapp.model.Section;
 import com.example.plannerapp.service.BoardService;
-import com.example.plannerapp.service.ColumnService;
+import com.example.plannerapp.service.SectionService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,17 +23,17 @@ public class BoardController {
             requestDtoMapper;
     private final ResponseDtoMapper<BoardResponseDto, Board>
     responseDtoMapper;
-    private final ColumnService columnService;
+    private final SectionService sectionService;
     private final ResponseDtoMapper<BoardWithColumnsResponseDto, Board> boardWithColumnsResponseDtoMapper;
     public BoardController(BoardService boardService,
                            RequestDtoMapper<BoardRequestDto, Board> requestDtoMapper,
                            ResponseDtoMapper<BoardResponseDto, Board> responseDtoMapper,
-                           ColumnService columnService,
+                           SectionService sectionService,
                            ResponseDtoMapper<BoardWithColumnsResponseDto, Board> boardWithColumnsResponseDtoMapper) {
         this.boardService = boardService;
         this.requestDtoMapper = requestDtoMapper;
         this.responseDtoMapper = responseDtoMapper;
-        this.columnService = columnService;
+        this.sectionService = sectionService;
         this.boardWithColumnsResponseDtoMapper = boardWithColumnsResponseDtoMapper;
     }
     @PostMapping
@@ -63,17 +63,17 @@ public class BoardController {
     }
 
     @PutMapping("/{id}")
-    public BoardResponseDto addColumnToBoardById(@PathVariable Long id,
+    public BoardResponseDto addSectionToBoardById(@PathVariable Long id,
                                                  @RequestBody List<Long> columnsIds) {
         Board board = boardService.getById(id);
-        List<Long> currentColumns = board.getColumns().stream()
+        List<Long> currentSections = board.getSections().stream()
                 .map(e -> e.getId())
                 .collect(Collectors.toList());
-        currentColumns.addAll(columnsIds);
-        List<Collumn> updatedCollumns = currentColumns.stream()
-                        .map(columnService::getById)
+        currentSections.addAll(columnsIds);
+        List<Section> updatedSections = currentSections.stream()
+                        .map(sectionService::getSectionById)
                 .collect(Collectors.toList());
-        board.setColumns(updatedCollumns);
+        board.setSections(updatedSections);
         Board updatedBoard = boardService.createBoard(board);
         return responseDtoMapper.mapToDto(updatedBoard);
     }
@@ -97,26 +97,26 @@ public class BoardController {
         return boardWithColumnsResponseDtoMapper.mapToDto(boardService.getById(id));
     }
 
-    @PutMapping("/{id}/remove-column")
-    public String removeColumnFromBoard(@PathVariable Long id, @RequestBody ColumnRequestDto columnRequestDto) {
+    @PutMapping("/{id}/remove-section")
+    public String removeSectionFromBoard(@PathVariable Long id, @RequestBody SectionRequestDto sectionRequestDto) {
         Board board = boardService.getById(id);
-        List<Collumn> columns = board.getColumns();
-        Collumn column = columnService.getColumnByName(columnRequestDto.getName());
-        List <Board> boards = column.getBoards();
+        List<Section> sections = board.getSections();
+        Section section = sectionService.getSectionByName(sectionRequestDto.getName());
+        List <Board> boards = section.getBoards();
         Board updatedBoard = new Board();
-        Collumn updatedColumn = new Collumn();
-        if (board != null && column != null) {
-            columns.remove(column);
-            board.setColumns(columns);
+        Section updatedSection = new Section();
+        if (board != null && section != null) {
+            sections.remove(section);
+            board.setSections(sections);
             updatedBoard = boardService.createBoard(board);
             boards.remove(board);
-            updatedColumn = columnService.createColumn(column);
+            updatedSection = sectionService.createSection(section);
         }
         if (updatedBoard == null) {
-            throw new RuntimeException("Can't remove column from board with id: " + id);
+            throw new RuntimeException("Can't remove section from board with id: " + id);
         }
-        if (updatedColumn == null) {
-            throw new RuntimeException("Can't update column after removing from board with id: " + id);
+        if (updatedSection == null) {
+            throw new RuntimeException("Can't update section after removing from board with id: " + id);
         }
         return "Successful";
     }

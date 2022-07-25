@@ -1,13 +1,13 @@
 package com.example.plannerapp.controller;
 
-import com.example.plannerapp.dto.request.ColumnRequestDto;
+import com.example.plannerapp.dto.request.SectionRequestDto;
 import com.example.plannerapp.dto.request.TaskRequestDto;
 import com.example.plannerapp.dto.response.TaskResponseDto;
 import com.example.plannerapp.mapper.RequestDtoMapper;
 import com.example.plannerapp.mapper.ResponseDtoMapper;
-import com.example.plannerapp.model.Collumn;
+import com.example.plannerapp.model.Section;
 import com.example.plannerapp.model.Task;
-import com.example.plannerapp.service.ColumnService;
+import com.example.plannerapp.service.SectionService;
 import com.example.plannerapp.service.TaskService;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,56 +25,56 @@ import java.util.stream.Collectors;
 @RequestMapping("/tasks")
 public class TaskController {
     private final TaskService taskService;
-    private final ColumnService columnService;
+    private final SectionService sectionService;
     private final RequestDtoMapper<TaskRequestDto, Task> requestDtoMapper;
     private final ResponseDtoMapper<TaskResponseDto, Task> responseDtoMapper;
 
-    private final RequestDtoMapper<ColumnRequestDto, Collumn> columnRequestDtoMapper;
+    private final RequestDtoMapper<SectionRequestDto, Section> sectionRequestDtoMapper;
 
     public TaskController(TaskService taskService,
-                          ColumnService columnService,
+                          SectionService sectionService,
                           RequestDtoMapper<TaskRequestDto, Task> requestDtoMapper,
                           ResponseDtoMapper<TaskResponseDto, Task> responseDtoMapper,
-                          RequestDtoMapper<ColumnRequestDto, Collumn> columnRequestDtoMapper) {
+                          RequestDtoMapper<SectionRequestDto, Section> sectionRequestDtoMapper) {
         this.taskService = taskService;
-        this.columnService = columnService;
+        this.sectionService = sectionService;
         this.requestDtoMapper = requestDtoMapper;
         this.responseDtoMapper = responseDtoMapper;
-        this.columnRequestDtoMapper = columnRequestDtoMapper;
+        this.sectionRequestDtoMapper = sectionRequestDtoMapper;
     }
 
-    @PostMapping("/columns/{id}")
+    @PostMapping("/sections/{id}")
     private TaskResponseDto createTask(@PathVariable Long id, @RequestBody TaskRequestDto taskRequestDto) {
         Task task = new Task();
         task.setTitle(taskRequestDto.getTitle());
         task.setDescription(taskRequestDto.getDescription());
-        Collumn collumn = columnService.getById(id);
-        task.setColumn(collumn);
+        Section section = sectionService.getSectionById(id);
+        task.setSection(section);
         Task createdTask = taskService.createTask(task);
         if (createdTask != null) {
-            List<Task> tasks = collumn.getTasks();
+            List<Task> tasks = section.getTasks();
             tasks.add(createdTask);
-            columnService.createColumn(collumn);
-            collumn.setTasks(tasks);
-            columnService.createColumn(collumn);
+            sectionService.createSection(section);
+            section.setTasks(tasks);
+            sectionService.createSection(section);
         }
         return responseDtoMapper.mapToDto(createdTask);
     }
 
     @GetMapping
-    public List<TaskResponseDto> getAll(){
+    public List<TaskResponseDto> getAllTasks(){
         return (taskService.findAll().stream()
                 .map(responseDtoMapper::mapToDto)
                 .collect(Collectors.toList()));
     }
 
     @GetMapping("/{id}")
-    public TaskResponseDto getById(@PathVariable Long id) {
+    public TaskResponseDto getTaskById(@PathVariable Long id) {
         return responseDtoMapper.mapToDto(taskService.findById(id));
     }
 
     @PutMapping("/{id}")
-    public TaskResponseDto update(@PathVariable Long id,
+    public TaskResponseDto updateTaskById(@PathVariable Long id,
                                   @RequestBody TaskRequestDto taskRequestDto) {
         Task task = taskService.findById(id);
         if (taskRequestDto.getTitle() != null) {
@@ -87,20 +87,20 @@ public class TaskController {
         return responseDtoMapper.mapToDto(updatedTask);
     }
 
-    @PutMapping("/{id}/status-update")
-    public TaskResponseDto updateTaskStatus(@PathVariable Long id,
-                                            @RequestBody ColumnRequestDto columnRequestDto) {
+    @PutMapping("/{id}/section-update")
+    public TaskResponseDto replaceTaskToOtherSection(@PathVariable Long id,
+                                            @RequestBody SectionRequestDto sectionRequestDto) {
         Task task = taskService.findById(id);
-        Collumn column = columnService.getColumnByName(columnRequestDto.getName());
+        Section column = sectionService.getSectionByName(sectionRequestDto.getName());
         if (task != null && column != null) {
-            task.setColumn(column);
+            task.setSection(column);
         }
         Task updatedTask = taskService.createTask(task);
         return responseDtoMapper.mapToDto(updatedTask);
     }
 
     @DeleteMapping("/{id}")
-    public TaskResponseDto delete(@PathVariable Long id) {
+    public TaskResponseDto deleteTaskById(@PathVariable Long id) {
         return responseDtoMapper.mapToDto(taskService.delete(id));
     }
 }
