@@ -32,8 +32,8 @@ public class ColumnServiceImpl implements ColumnService {
     }
 
     @Override
-    public Collumn getCollumnByName(String name) {
-        return columnRepository.getCollumnByName(name);
+    public Collumn getColumnByName(String name) {
+        return columnRepository.getColumnByName(name);
     }
 
     @Override

@@ -37,4 +37,9 @@ public class BoardServiceImpl implements BoardService {
         boardRepository.deleteById(id);
         return deletedBoard;
     }
+
+    @Override
+    public Board getBoardByName(String name) {
+        return boardRepository.getBoardByName(name);
+    }
 }

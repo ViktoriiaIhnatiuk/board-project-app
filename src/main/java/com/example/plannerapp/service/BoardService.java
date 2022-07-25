@@ -12,4 +12,6 @@ public interface BoardService {
     Board getById(Long id);
 
     Board delete (Long id);
+
+    Board getBoardByName(String name);
 }

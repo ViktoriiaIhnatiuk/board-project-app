@@ -8,5 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ColumnRepository extends JpaRepository<Collumn, Long> {
-  Collumn getCollumnByName(String name);
+  Collumn getColumnByName(String name);
 }

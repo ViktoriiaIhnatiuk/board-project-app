@@ -1,15 +1,6 @@
 package com.example.plannerapp.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "columns")
@@ -22,8 +13,8 @@ public class Collumn {
     private String name;
     @OneToMany (cascade = {CascadeType.REMOVE}, mappedBy = "collumn")
     private List<Task> tasks;
-    @ManyToOne
-    private Board board;
+    @ManyToMany
+    private List<Board> boards;
 
     public Long getId() {
         return id;
@@ -49,12 +40,12 @@ public class Collumn {
         this.tasks = tasks;
     }
 
-    public Board getBoard() {
-        return board;
+    public List<Board> getBoards() {
+        return boards;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
+    public void setBoards(List<Board> boards) {
+        this.boards = boards;
     }
 
     @Override
@@ -63,7 +54,7 @@ public class Collumn {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", tasks=" + tasks +
-                ", board=" + board +
+                ", board=" + boards +
                 '}';
     }
 }

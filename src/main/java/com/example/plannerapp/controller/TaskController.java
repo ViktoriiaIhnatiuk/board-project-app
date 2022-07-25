@@ -9,7 +9,14 @@ import com.example.plannerapp.model.Collumn;
 import com.example.plannerapp.model.Task;
 import com.example.plannerapp.service.ColumnService;
 import com.example.plannerapp.service.TaskService;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,8 +91,10 @@ public class TaskController {
     public TaskResponseDto updateTaskStatus(@PathVariable Long id,
                                             @RequestBody ColumnRequestDto columnRequestDto) {
         Task task = taskService.findById(id);
-        Collumn collumn = columnService.getCollumnByName(columnRequestDto.getName());
-        task.setColumn(columnService.getById(collumn.getId()));
+        Collumn column = columnService.getColumnByName(columnRequestDto.getName());
+        if (task != null && column != null) {
+            task.setColumn(column);
+        }
         Task updatedTask = taskService.createTask(task);
         return responseDtoMapper.mapToDto(updatedTask);
     }

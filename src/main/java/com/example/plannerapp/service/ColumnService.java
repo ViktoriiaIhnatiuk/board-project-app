@@ -11,7 +11,7 @@ public interface ColumnService {
 
     Collumn getById(Long id);
 
-    Collumn getCollumnByName(String name);
+    Collumn getColumnByName(String name);
 
     void delete(Long id);
 }

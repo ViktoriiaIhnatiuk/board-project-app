@@ -3,8 +3,11 @@ package com.example.plannerapp.mapper;
 import com.example.plannerapp.dto.request.BoardRequestDto;
 import com.example.plannerapp.dto.response.BoardResponseDto;
 import com.example.plannerapp.model.Board;
+import com.example.plannerapp.model.Collumn;
 import com.example.plannerapp.service.ColumnService;
 import org.springframework.stereotype.Component;
+
+import java.util.stream.Collectors;
 
 
 @Component
@@ -33,9 +36,11 @@ public class BoardMapper implements RequestDtoMapper<BoardRequestDto, Board>,
         boardResponseDto.setId(model.getId());
         boardResponseDto.setBackgroundImagePath(model.getBackgroundImagePath());
         boardResponseDto.setName(model.getName());
-//        boardResponseDto.setColumnsIds(model.getColumns().stream()
-//                .map(Collumn::getId)
-//                .collect(Collectors.toList()));
+        if (model.getColumns() != null) {
+            boardResponseDto.setColumnsIds(model.getColumns().stream()
+                    .map(Collumn::getId)
+                    .collect(Collectors.toList()));
+        }
         return boardResponseDto;
     }
 }

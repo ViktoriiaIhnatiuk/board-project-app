@@ -2,6 +2,7 @@ package com.example.plannerapp.mapper;
 
 import com.example.plannerapp.dto.request.ColumnRequestDto;
 import com.example.plannerapp.dto.response.ColumnResponseDto;
+import com.example.plannerapp.model.Board;
 import com.example.plannerapp.model.Collumn;
 import com.example.plannerapp.model.Task;
 import com.example.plannerapp.service.BoardService;
@@ -33,8 +34,10 @@ public class ColumnMapper implements RequestDtoMapper<ColumnRequestDto, Collumn>
         ColumnResponseDto columnResponseDto = new ColumnResponseDto();
         columnResponseDto.setId(model.getId());
         columnResponseDto.setName(model.getName());
-        if (model.getBoard() != null) {
-        columnResponseDto.setBoardId(model.getBoard().getId());
+        if (model.getBoards() != null && !model.getBoards().isEmpty()) {
+        columnResponseDto.setBoardIds(model.getBoards().stream()
+                .map(Board::getId)
+                .collect(Collectors.toList()));
         }
         if (model.getTasks() != null) {
             columnResponseDto.setTasksIds(model.getTasks().stream()

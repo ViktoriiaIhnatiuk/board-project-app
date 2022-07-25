@@ -1,19 +1,12 @@
-package com.example.plannerapp.model;
+package com.example.plannerapp.dto.response;
 
-import javax.persistence.*;
 import java.util.List;
 
-@Entity
-@Table(name = "boards")
-public class Board {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class BoardWithColumnsResponseDto {
     private Long id;
-    @Column(unique = true)
     private String name;
     private String backgroundImagePath;
-    @ManyToMany (cascade = {CascadeType.REMOVE})
-    private List<Collumn> collumns;
+    private List<ColumnResponseDtoWithTasks> columns;
 
     public Long getId() {
         return id;
@@ -39,21 +32,21 @@ public class Board {
         this.backgroundImagePath = backgroundImagePath;
     }
 
-    public List<Collumn> getColumns() {
-        return collumns;
+    public List<ColumnResponseDtoWithTasks> getColumns() {
+        return columns;
     }
 
-    public void setColumns(List<Collumn> collumns) {
-        this.collumns = collumns;
+    public void setColumns(List<ColumnResponseDtoWithTasks> columns) {
+        this.columns = columns;
     }
 
     @Override
     public String toString() {
-        return "Board{" +
+        return "BoardResponseDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", backgroundImagePath='" + backgroundImagePath + '\'' +
-                ", collumns=" + collumns +
+                ", columnsIds=" + columns +
                 '}';
     }
 }
