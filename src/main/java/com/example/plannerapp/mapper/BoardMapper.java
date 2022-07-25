@@ -4,20 +4,13 @@ import com.example.plannerapp.dto.request.BoardRequestDto;
 import com.example.plannerapp.dto.response.BoardResponseDto;
 import com.example.plannerapp.model.Board;
 import com.example.plannerapp.model.Section;
-import com.example.plannerapp.service.SectionService;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
-
 @Component
 public class BoardMapper implements RequestDtoMapper<BoardRequestDto, Board>,
     ResponseDtoMapper<BoardResponseDto, Board> {
-    private final SectionService sectionService;
-
-    public BoardMapper(SectionService sectionService) {
-        this.sectionService = sectionService;
-    }
 
     @Override
     public Board mapToModel(BoardRequestDto dto) {

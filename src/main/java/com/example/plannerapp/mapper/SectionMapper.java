@@ -14,13 +14,6 @@ import java.util.stream.Collectors;
 @Component
 public class SectionMapper implements RequestDtoMapper<SectionRequestDto, Section>,
         ResponseDtoMapper<SectionResponseDto, Section> {
-    private final BoardService boardService;
-    private final TaskService taskService;
-
-    public SectionMapper(BoardService boardService, TaskService taskService) {
-        this.boardService = boardService;
-        this.taskService = taskService;
-    }
 
     @Override
     public Section mapToModel(SectionRequestDto dto) {

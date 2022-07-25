@@ -12,13 +12,11 @@ import java.util.stream.Collectors;
 
 @Component
 public class BoardWithColumnsMapper implements ResponseDtoMapper<BoardWithColumnsResponseDto, Board> {
-    private ResponseDtoMapper<SectionWithTasksResponseDto, Section> columnResponseDtoWithTasks;
-    private final SectionService sectionService;
+    private final ResponseDtoMapper<SectionWithTasksResponseDto, Section> columnResponseDtoWithTasks;
 
     public BoardWithColumnsMapper(ResponseDtoMapper<SectionWithTasksResponseDto, Section> columnResponseDtoWithTasks,
                                   SectionService sectionService) {
         this.columnResponseDtoWithTasks = columnResponseDtoWithTasks;
-        this.sectionService = sectionService;
     }
 
     @Override

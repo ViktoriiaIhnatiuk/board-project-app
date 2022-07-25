@@ -9,11 +9,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class TaskMapper implements RequestDtoMapper <TaskRequestDto, Task>,
 ResponseDtoMapper<TaskResponseDto, Task> {
-    private final SectionService sectionService;
-
-    public TaskMapper(SectionService sectionService) {
-        this.sectionService = sectionService;
-    }
 
     @Override
     public Task mapToModel(TaskRequestDto dto) {

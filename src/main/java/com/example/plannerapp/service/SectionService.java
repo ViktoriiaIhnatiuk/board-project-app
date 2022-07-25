@@ -1,17 +1,24 @@
 package com.example.plannerapp.service;
 
-import com.example.plannerapp.model.Section;
+import com.example.plannerapp.dto.request.BoardRequestDto;
+import com.example.plannerapp.dto.request.SectionRequestDto;
+import com.example.plannerapp.dto.response.DeletedSectionResponseDto;
+import com.example.plannerapp.dto.response.SectionResponseDto;
 
 import java.util.List;
 
 public interface SectionService {
-    Section createSection(Section section);
+    SectionResponseDto createSection(SectionRequestDto sectionRequestDto);
 
-    List<Section> getAllSections();
+    List<SectionResponseDto> getAllSections();
 
-    Section getSectionById(Long id);
+    SectionResponseDto getSectionById(Long id);
 
-    Section getSectionByName(String name);
+    SectionResponseDto getSectionByName(String name);
 
-    void deleteSectionById(Long id);
+    DeletedSectionResponseDto deleteSectionById(Long id);
+
+    SectionResponseDto updateSectionById(Long id, SectionRequestDto sectionRequestDto);
+
+    SectionResponseDto setSectionToBoard(Long id, BoardRequestDto boardRequestDto);
 }
