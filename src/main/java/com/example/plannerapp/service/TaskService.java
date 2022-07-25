@@ -1,15 +1,23 @@
 package com.example.plannerapp.service;
 
-import com.example.plannerapp.model.Task;
+import com.example.plannerapp.dto.request.SectionRequestDto;
+import com.example.plannerapp.dto.request.TaskRequestDto;
+import com.example.plannerapp.dto.response.TaskResponseDto;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
 public interface TaskService {
-    Task createTask(Task task);
+    TaskResponseDto createTask(Long id, TaskRequestDto taskRequestDto);
 
-    List<Task> findAll();
+    List<TaskResponseDto> getAllTasks();
 
-    Task findById(Long id);
+    TaskResponseDto getTaskById(Long id);
 
-    Task delete(Long id);
+    TaskResponseDto deleteTaskById(Long id);
+
+    TaskResponseDto updateTaskById(Long id, TaskRequestDto taskRequestDto);
+
+    TaskResponseDto replaceTaskToOtherSection(Long id, SectionRequestDto sectionRequestDto);
 }

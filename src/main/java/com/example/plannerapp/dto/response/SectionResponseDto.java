@@ -6,7 +6,7 @@ public class SectionResponseDto {
     private Long id;
     private String name;
     private List<Long> tasksIds;
-    private List<Long> boardIds;
+    private List<Long> boardsIds;
 
     public Long getId() {
         return id;
@@ -33,11 +33,11 @@ public class SectionResponseDto {
     }
 
     public List<Long> getBoardIds() {
-        return boardIds;
+        return boardsIds;
     }
 
     public void setBoardIds(List<Long> boardIds) {
-        this.boardIds = boardIds;
+        this.boardsIds = boardIds;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class SectionResponseDto {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", tasksIds=" + tasksIds +
-                ", boardId=" + boardIds +
+                ", boardId=" + boardsIds +
                 '}';
     }
 }
