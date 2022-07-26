@@ -3,7 +3,7 @@ package com.example.plannerapp.service.impl;
 import com.example.plannerapp.dto.request.BoardRequestDto;
 import com.example.plannerapp.dto.request.SectionRequestDto;
 import com.example.plannerapp.dto.response.BoardResponseDto;
-import com.example.plannerapp.dto.response.BoardWithColumnsResponseDto;
+import com.example.plannerapp.dto.response.BoardWithSectionsResponseDto;
 import com.example.plannerapp.mapper.RequestDtoMapper;
 import com.example.plannerapp.mapper.ResponseDtoMapper;
 import com.example.plannerapp.model.Board;
@@ -22,19 +22,19 @@ public class BoardServiceImpl implements BoardService {
             requestDtoMapper;
     private final ResponseDtoMapper<BoardResponseDto, Board>
             responseDtoMapper;
-    private final ResponseDtoMapper<BoardWithColumnsResponseDto, Board> boardWithColumnsResponseDtoMapper;
+    private final ResponseDtoMapper<BoardWithSectionsResponseDto, Board> boardWithSectionsResponseDtoMapper;
 
     private final SectionRepository sectionRepository;
 
     public BoardServiceImpl(BoardRepository boardRepository,
                             RequestDtoMapper<BoardRequestDto, Board> requestDtoMapper,
                             ResponseDtoMapper<BoardResponseDto, Board> responseDtoMapper,
-                            ResponseDtoMapper<BoardWithColumnsResponseDto, Board> boardWithColumnsResponseDtoMapper,
+                            ResponseDtoMapper<BoardWithSectionsResponseDto, Board> boardWithSectionsResponseDtoMapper,
                             SectionRepository sectionRepository) {
         this.boardRepository = boardRepository;
         this.requestDtoMapper = requestDtoMapper;
         this.responseDtoMapper = responseDtoMapper;
-        this.boardWithColumnsResponseDtoMapper = boardWithColumnsResponseDtoMapper;
+        this.boardWithSectionsResponseDtoMapper = boardWithSectionsResponseDtoMapper;
         this.sectionRepository = sectionRepository;
     }
 
@@ -93,8 +93,8 @@ public class BoardServiceImpl implements BoardService {
     }
 
     @Override
-    public BoardWithColumnsResponseDto getFullBoardInfoById(Long id) {
-        return boardWithColumnsResponseDtoMapper.mapToDto(boardRepository.getById(id));
+    public BoardWithSectionsResponseDto getFullBoardInfoById(Long id) {
+        return boardWithSectionsResponseDtoMapper.mapToDto(boardRepository.getById(id));
     }
 
     @Override
