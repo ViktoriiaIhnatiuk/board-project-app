@@ -3,7 +3,7 @@ package com.example.plannerapp.service;
 import com.example.plannerapp.dto.request.BoardRequestDto;
 import com.example.plannerapp.dto.request.SectionRequestDto;
 import com.example.plannerapp.dto.response.BoardResponseDto;
-import com.example.plannerapp.dto.response.BoardWithColumnsResponseDto;
+import com.example.plannerapp.dto.response.BoardWithSectionsResponseDto;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ public interface BoardService {
 
     BoardResponseDto changePictureToBoardById(Long id, String path);
 
-    BoardWithColumnsResponseDto getFullBoardInfoById(Long id);
+    BoardWithSectionsResponseDto getFullBoardInfoById(Long id);
 
     String removeSectionFromBoard(Long id, SectionRequestDto sectionRequestDto);
 }

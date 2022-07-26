@@ -3,7 +3,7 @@ package com.example.plannerapp.controller;
 import com.example.plannerapp.dto.request.BoardRequestDto;
 import com.example.plannerapp.dto.request.SectionRequestDto;
 import com.example.plannerapp.dto.response.BoardResponseDto;
-import com.example.plannerapp.dto.response.BoardWithColumnsResponseDto;
+import com.example.plannerapp.dto.response.BoardWithSectionsResponseDto;
 import com.example.plannerapp.service.BoardService;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -56,7 +56,7 @@ public class BoardController {
     }
 
     @GetMapping("/{id}/read-full")
-    public BoardWithColumnsResponseDto getFullBoardInfoById(@PathVariable Long id) {
+    public BoardWithSectionsResponseDto getFullBoardInfoById(@PathVariable Long id) {
         return boardService.getFullBoardInfoById(id);
     }
 

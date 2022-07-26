@@ -2,7 +2,7 @@ package com.example.plannerapp.dto.response;
 
 import java.util.List;
 
-public class BoardWithColumnsResponseDto {
+public class BoardWithSectionsResponseDto {
     private Long id;
     private String name;
     private String backgroundImagePath;
@@ -32,12 +32,12 @@ public class BoardWithColumnsResponseDto {
         this.backgroundImagePath = backgroundImagePath;
     }
 
-    public List<SectionWithTasksResponseDto> getColumns() {
+    public List<SectionWithTasksResponseDto> getSections() {
         return sections;
     }
 
-    public void setColumns(List<SectionWithTasksResponseDto> columns) {
-        this.sections = columns;
+    public void setSections(List<SectionWithTasksResponseDto> sections) {
+        this.sections = sections;
     }
 
     @Override
